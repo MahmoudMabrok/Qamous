@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Tawasol</string>
+    <string name="hello_to_app">Hello To App</string>
+    <string name="word_to_translate">Word To Translate</string>
+</resources>

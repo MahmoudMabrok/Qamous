@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layoutDirection="ltr"
+    android:orientation="vertical"
+    android:padding="@dimen/_5sdp"
+    tools:context=".feature.home.MainActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:gravity="center_horizontal"
+        android:padding="@dimen/_5sdp"
+        android:text="@string/hello_to_app"
+        android:textSize="@dimen/textSize" />
+
+    <ImageView
+        android:id="@+id/imRes"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="@dimen/_16sdp"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:layout_weight="1"
+        android:scaleType="fitXY"
+        android:src="@drawable/m3" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/_10sdp">
+
+        <EditText
+            android:id="@+id/edWordTotranslate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="@dimen/_2sdp"
+            android:layout_weight="1"
+            android:background="@drawable/ed_back"
+            android:hint="@string/word_to_translate" />
+
+        <ImageButton
+            android:id="@+id/btnEvaluate"
+            style="@style/Base.Widget.AppCompat.Button.Borderless"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_evaluate" />
+
+    </LinearLayout>
+
+</LinearLayout>
