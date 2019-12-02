@@ -14,7 +14,7 @@ public class MainViewModel extends AndroidViewModel {
         super(application);
     }
 
-    public void evaluate(String text) {
+    void evaluate(String text) {
         // call API and return res
         switch (text) {
             case "1":
@@ -23,6 +23,12 @@ public class MainViewModel extends AndroidViewModel {
             case "2":
                 value.setValue("2");
                 break;
+
+            case "3":
+                value.setValue("3");
+                break;
+
+
         }
     }
 }
