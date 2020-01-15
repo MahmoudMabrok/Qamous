@@ -37,7 +37,7 @@ class Splash : AppCompatActivity() {
                 UtilPair.create(tvMainSplash, "main"),
                 UtilPair.create(tvSubSplash, "sub")
         )
-
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent, option.toBundle())
 
     }

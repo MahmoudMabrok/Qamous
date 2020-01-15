@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/category_border"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="@dimen/category_padding">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_evaluate"
+        android:layout_marginBottom="@dimen/_16sdp"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/open_camera"
+        android:textColor="@color/tvColorSplash"
+        android:textSize="@dimen/tvSizeCategory" />
+
+
+
+
+</LinearLayout>

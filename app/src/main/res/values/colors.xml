@@ -6,4 +6,11 @@
 
     <color name="white">#F7F4F5</color>
     <color name="spin_color">#ffffff</color>
+
+    <color name="main">#ff9071</color>
+    <color name="backIcon">#fff5b5</color>
+    <color name="tvColorMain">@color/main</color>
+    <color name="tvColorSub">#848484</color>
+    <color name="tvColorSplash">#F1ECEC</color>
+
 </resources>

@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="textSize">@dimen/_17ssp</dimen>
+    <dimen name="tvSizeCategory">@dimen/_17ssp</dimen>
+    <dimen name="category_padding">@dimen/_10sdp</dimen>
+    <dimen name="strock_category">@dimen/_2sdp</dimen>
+    <dimen name="padding_category">@dimen/_10sdp</dimen>
 </resources>
