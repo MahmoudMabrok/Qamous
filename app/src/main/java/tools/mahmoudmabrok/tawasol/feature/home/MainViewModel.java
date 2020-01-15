@@ -27,8 +27,6 @@ public class MainViewModel extends AndroidViewModel {
             case "3":
                 value.setValue("3");
                 break;
-
-
         }
     }
 }

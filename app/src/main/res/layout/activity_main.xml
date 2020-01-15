@@ -56,29 +56,5 @@
     </FrameLayout>
 
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:layout_marginBottom="@dimen/_10sdp">
-
-        <EditText
-            android:id="@+id/edWordTotranslate"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginEnd="@dimen/_2sdp"
-            android:layout_weight="1"
-            android:background="@drawable/ed_back"
-            android:hint="@string/word_to_translate" />
-
-        <ImageButton
-            android:id="@+id/btnEvaluate"
-            style="@style/Base.Widget.AppCompat.Button.Borderless"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_evaluate" />
-
-    </LinearLayout>
 
 </LinearLayout>
