@@ -17,7 +17,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import tools.mahmoudmabrok.tawasol.R;
-import tools.mahmoudmabrok.tawasol.feature.Utils;
+import tools.mahmoudmabrok.tawasol.utils.Utils;
 
 public class MainActivity extends AppCompatActivity {
 

@@ -1,4 +1,4 @@
-package tools.mahmoudmabrok.tawasol.feature;
+package tools.mahmoudmabrok.tawasol.utils;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
@@ -9,6 +9,7 @@ import android.view.inputmethod.InputMethodManager;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class Utils {
+
     public static void hideInputKeyboard(Context context) {
         InputMethodManager imm = null;
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.CUPCAKE) {
