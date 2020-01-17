@@ -10,6 +10,10 @@
         <!-- enable window content transitions -->
         <item name="android:windowActivityTransitions">true</item>
 
+       <!-- <item name="android:windowEnterTransition">@android:anim/fade_in</item>
+        <item name="android:windowExitTransition">@android:anim/fade_out</item>-->
+
+
     <!--    &lt;!&ndash; specify enter and exit transitions &ndash;&gt;
         <item name="android:windowEnterTransition">@transition/explode</item>
         <item name="android:windowExitTransition">@transition/explode</item>

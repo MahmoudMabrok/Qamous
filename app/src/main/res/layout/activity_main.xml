@@ -9,52 +9,5 @@
     android:padding="@dimen/_5sdp"
     tools:context=".feature.home.MainActivity">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/_10sdp"
-        android:gravity="center_horizontal"
-        android:padding="@dimen/_5sdp"
-        android:text="@string/hello_to_app"
-        android:textSize="@dimen/textSize" />
-
-    <com.github.ybq.android.spinkit.SpinKitView xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/spScoreboard"
-        style="@style/SpinKitView.Large.Circle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="@dimen/_16sdp"
-        android:visibility="gone"
-        app:SpinKit_Color="@color/spin_color" />
-
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
-
-
-        <ImageView
-            android:id="@+id/imRes"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="@dimen/_16sdp"
-            android:layout_marginBottom="@dimen/_10sdp"
-            android:scaleType="fitXY"
-            android:src="@drawable/m3"
-            android:visibility="gone" />
-
-        <TextView
-            android:id="@+id/tvInfo"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="@string/welcomeToSelect"
-            android:textSize="@dimen/_22ssp" />
-
-
-    </FrameLayout>
-
-
 
 </LinearLayout>

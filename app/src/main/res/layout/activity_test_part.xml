@@ -5,32 +5,53 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:layoutDirection="ltr"
     tools:context=".feature.text.TextPart">
 
     <!--appBar-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/tvColorMain"
+        android:background="@color/white"
+        android:paddingEnd="@dimen/_10sdp"
+        android:paddingStart="@dimen/_10sdp"
         android:paddingTop="@dimen/_16sdp"
         android:paddingBottom="@dimen/_16sdp">
+
+        <ImageView
+            android:id="@+id/imBackFromText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_left"
+            android:tint="@color/tvColorMain"/>
+
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            android:textColor="@color/tvColorSplash"
+            android:textColor="@color/tvColorMain"
             android:text="AAA"
             android:textSize="@dimen/tvSizeCategory"/>
 
-    </LinearLayout>
-    <!--rv-->
+        <ImageView
+            android:id="@+id/imOpenCamera"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_camera"
+            android:tint="@color/tvColorMain"/>
 
+    </LinearLayout>
+
+
+    <!--rv-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:orientation="vertical"
-        android:padding="@dimen/_16sdp">
+        android:padding="@dimen/_16sdp"
+        android:background="@color/resultTextBack">
 
         <TextView
             android:id="@+id/tvResultText"
@@ -38,14 +59,16 @@
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:textSize="@dimen/tvSizeCategory"
+            android:textColor="@color/black"
             android:text="AAA"
-            android:layout_marginBottom="@dimen/_16sdp"
-            />
+            android:layout_marginBottom="@dimen/_16sdp" />
 
         <ImageView
+            android:id="@+id/imResult"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
+            android:scaleType="fitXY"
             />
     </LinearLayout>
 
@@ -66,6 +89,7 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:hint="@string/enter_text_here"
+            android:text="@string/test"
             android:background="@drawable/ed_back"
             android:layout_marginLeft="@dimen/_16sdp"
             android:layout_marginRight="@dimen/_16sdp"

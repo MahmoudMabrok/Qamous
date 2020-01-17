@@ -14,7 +14,8 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -51,13 +52,14 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
 
 
+    def tf = "0.0.0-nightly"
+
     // Build off of nightly TensorFlow Lite
-    implementation 'org.tensorflow:tensorflow-lite:0.0.0-nightly'
-    implementation 'org.tensorflow:tensorflow-lite-gpu:0.0.0-nightly'
+    implementation "org.tensorflow:tensorflow-lite:$tf"
+    implementation "org.tensorflow:tensorflow-lite-gpu:$tf"
     // Use local TensorFlow library
     // implementation 'org.tensorflow:tensorflow-lite-local:0.0.0'
 
-    implementation "com.github.ybq:Android-SpinKit:1.2.0"
-
+//    implementation "com.github.ybq:Android-SpinKit:1.4.0"
 
 }
