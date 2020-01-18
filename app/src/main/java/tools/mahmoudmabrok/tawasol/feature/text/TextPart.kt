@@ -21,11 +21,11 @@ class TextPart : AppCompatActivity() {
         setContentView(R.layout.activity_test_part)
 
         imBackFromText.setOnClickListener {
-            finish()
+            it.animateItemWithAction { finish() }
         }
 
         imOpenCamera.setOnClickListener {
-            this.goTo(CameraPart::class.java)
+            it.animateItemWithAction { this.goTo(CameraPart::class.java) }
         }
 
         imAction.setOnClickListener {
@@ -43,10 +43,6 @@ class TextPart : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out)
-    }
-    override fun onBackPressed() {
-        super.onBackPressed()
-        finish()
     }
 
     private fun process(text: String) {
@@ -76,11 +72,8 @@ class TextPart : AppCompatActivity() {
     }
 
     private fun processNameIntoImage(name: String) {
-        /*val an = AnimationUtils.loadAnimation(this,android.R.anim.fade_in)
-        an.duration = 600
-        imResult.animation = an
-        */
         imResult.setImageDrawable(this.getImage(name))
         tvResultText.text = name
+        imResult.animItem()
     }
 }
