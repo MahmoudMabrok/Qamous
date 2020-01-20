@@ -9,11 +9,11 @@
 
     <ImageView
         android:id="@+id/imSplash"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="@dimen/logoDim"
+        android:layout_height="@dimen/logoDim"
         android:layout_marginTop="108dp"
         android:scaleType="fitXY"
-        android:src="@mipmap/ic_launcher"
+        android:src="@mipmap/ic_launcher_foreground"
         android:transitionName="im"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.504"
@@ -24,31 +24,30 @@
         android:id="@+id/tvMainSplash"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="44dp"
         android:padding="10dp"
         android:text="@string/appName"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textColor="@color/tvColorSplash"
+        android:textSize="@dimen/mainFontSize"
+        android:textStyle="bold"
         android:transitionName="main"
-        app:autoSizeTextType="uniform"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.509"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imSplash"
-        app:layout_constraintVertical_bias="0.116" />
+        app:layout_constraintTop_toBottomOf="@+id/imSplash" />
 
     <TextView
         android:id="@+id/tvSubSplash"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="52dp"
         android:padding="10dp"
         android:text="@string/appDescription"
         android:textAlignment="center"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+       android:textSize="@dimen/subFontSize"
         android:textColor="@color/tvColorSplash"
         android:transitionName="sub"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvMainSplash" />
 </androidx.constraintlayout.widget.ConstraintLayout>

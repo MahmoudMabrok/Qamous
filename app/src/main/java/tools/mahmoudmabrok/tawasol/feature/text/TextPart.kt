@@ -25,7 +25,10 @@ class TextPart : AppCompatActivity() {
         }
 
         imOpenCamera.setOnClickListener {
-            it.animateItemWithAction { this.goTo(CameraPart::class.java) }
+            it.animateItemWithAction {
+                this.goTo(CameraPart::class.java)
+                finish()
+            }
         }
 
         imAction.setOnClickListener {

@@ -12,11 +12,12 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
+        android:background="@color/appBar"
         android:paddingEnd="@dimen/_10sdp"
         android:paddingStart="@dimen/_10sdp"
         android:paddingTop="@dimen/_16sdp"
-        android:paddingBottom="@dimen/_16sdp">
+        android:paddingBottom="@dimen/_16sdp"
+        android:elevation="@dimen/_4sdp">
 
         <ImageView
             android:id="@+id/imBackFromText"
@@ -31,7 +32,7 @@
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:textColor="@color/tvColorMain"
-            android:text="AAA"
+            android:text="Text"
             android:textSize="@dimen/tvSizeCategory"/>
 
         <ImageView

@@ -20,6 +20,7 @@ class CameraPart : AppCompatActivity() {
 
         imOpenText.setOnClickListener {
             this.goTo(TextPart::class.java)
+            finish()
         }
 
     }

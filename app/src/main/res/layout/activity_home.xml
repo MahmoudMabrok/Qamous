@@ -7,17 +7,20 @@
     android:background="@mipmap/splash"
     tools:context=".feature.home.Home">
 
+
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/logoDim"
+        android:layout_height="@dimen/logoDim"
+        android:layout_marginBottom="16dp"
         android:src="@mipmap/ic_launcher_foreground"
         android:transitionName="im"
         app:layout_constraintBottom_toTopOf="@+id/textView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/textView"
@@ -27,69 +30,62 @@
         android:text="@string/appName"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textColor="@color/tvColorSplash"
-        android:textStyle="bold"
         android:textSize="@dimen/mainFontSize"
+        android:textStyle="bold"
         android:transitionName="main"
         app:layout_constraintBottom_toTopOf="@+id/textView2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="10dp"
+        android:layout_marginBottom="56dp"
         android:text="@string/appDescription"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textColor="@color/tvColorSplash"
-        android:transitionName="sub"
         android:textSize="@dimen/subFontSize"
+        android:transitionName="sub"
         app:layout_constraintBottom_toTopOf="@+id/openCamer"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
-
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <include
         android:id="@+id/openCamer"
         layout="@layout/camer_layout"
         android:layout_width="@dimen/categoryWidth"
         android:layout_height="@dimen/categoryHeight"
+        android:layout_marginBottom="52dp"
         app:layout_constraintBottom_toTopOf="@+id/openText"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <include
         android:id="@+id/openText"
         layout="@layout/text_layout"
         android:layout_width="@dimen/categoryWidth"
         android:layout_height="@dimen/categoryHeight"
+        android:layout_marginBottom="28dp"
         app:layout_constraintBottom_toTopOf="@+id/button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/openCamer" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
         android:background="@drawable/support_btn_back"
+        android:paddingStart="@dimen/_10sdp"
+        android:paddingEnd="@dimen/_10sdp"
         android:text="Contact US"
         android:textSize="@dimen/contactFontSize"
-        android:paddingStart="@dimen/_5sdp"
-        android:paddingEnd="@dimen/_5sdp"
-        android:textStyle="normal|italic"
+        android:textStyle="normal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/openText" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

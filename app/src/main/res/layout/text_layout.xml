@@ -8,8 +8,8 @@
     android:padding="@dimen/category_padding">
 
     <ImageView
-        android:layout_width="24dp"
-        android:layout_height="24dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:src="@drawable/ic_text"
         android:tint="@color/tvColorSplash"
         android:layout_marginBottom="@dimen/_16sdp"/>

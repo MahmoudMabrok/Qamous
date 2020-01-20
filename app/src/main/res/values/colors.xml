@@ -5,6 +5,7 @@
     <color name="colorAccent">#D81B60</color>
 
     <color name="white">#F7F4F5</color>
+    <color name="appBar">#FCFCFC</color>
     <color name="spin_color">#ffffff</color>
 
     <color name="main">#ff9071</color>
