@@ -5,4 +5,15 @@
     <dimen name="category_padding">@dimen/_10sdp</dimen>
     <dimen name="strock_category">@dimen/_2sdp</dimen>
     <dimen name="padding_category">@dimen/_10sdp</dimen>
+
+    <dimen name="mainFontSize">@dimen/_25ssp</dimen>
+    <dimen name="subFontSize">@dimen/_14ssp</dimen>
+    <dimen name="categoryFontSize">@dimen/_16ssp</dimen>
+    <dimen name="contactFontSize">@dimen/_12ssp</dimen>
+
+    <dimen name="categoryWidth">@dimen/_250sdp</dimen>
+    <dimen name="categoryHeight">@dimen/_100sdp</dimen>
+
+
+    <dimen name="iconDim">@dimen/_24sdp</dimen>
 </resources>
