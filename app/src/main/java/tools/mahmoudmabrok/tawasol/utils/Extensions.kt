@@ -8,9 +8,8 @@ import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.util.Log
 import android.view.View
-import android.view.animation.AlphaAnimation
-import android.view.animation.Animation
 import android.view.animation.OvershootInterpolator
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 
@@ -30,6 +29,18 @@ fun Context.show(msg: String) {
 fun Activity.goTo(dst: Class<*>) {
     startActivity(Intent(this, dst))
 }
+
+
+fun Context.dismissKeyboard() {
+    val imm by lazy { this.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager }
+    val windowHeightMethod = InputMethodManager::class.java.getMethod("getInputMethodWindowVisibleHeight")
+    val height = windowHeightMethod.invoke(imm) as Int
+    if (height > 0) {
+        imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0)
+    }
+}
+
+
 
 fun Context.getImage(name: String): Drawable? {
     val resID = this.resources.getIdentifier(name,

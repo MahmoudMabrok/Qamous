@@ -1,24 +1,22 @@
 package tools.mahmoudmabrok.tawasol.feature.text
 
-import android.R.attr.name
-import android.animation.AnimatorSet
-import android.content.res.Resources
 import android.os.Bundle
 import android.os.Handler
-import android.view.ViewPropertyAnimator
-import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_test_part.*
 import tools.mahmoudmabrok.tawasol.R
 import tools.mahmoudmabrok.tawasol.feature.camera.CameraPart
 import tools.mahmoudmabrok.tawasol.utils.*
-import java.util.concurrent.TimeUnit
 
 
 class TextPart : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_test_part)
+
+        /*  setSupportActionBar(textToolbar)
+          supportActionBar?.setHomeButtonEnabled(true)
+        */
 
         imBackFromText.setOnClickListener {
             it.animateItemWithAction { finish() }
@@ -32,6 +30,7 @@ class TextPart : AppCompatActivity() {
         }
 
         imAction.setOnClickListener {
+            this.dismissKeyboard()
             val name = edText.text.toString().clear()
             tvResultText.text = name
             try {
