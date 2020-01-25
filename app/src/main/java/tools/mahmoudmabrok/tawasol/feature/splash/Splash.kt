@@ -2,18 +2,20 @@ package tools.mahmoudmabrok.tawasol.feature.splash
 
 import android.app.ActivityOptions
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
-import android.view.View
-import androidx.core.app.ActivityOptionsCompat
+import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_splash.*
 import tools.mahmoudmabrok.tawasol.R
+import tools.mahmoudmabrok.tawasol.data.Repository
+import tools.mahmoudmabrok.tawasol.data.local.WordItem
 import tools.mahmoudmabrok.tawasol.feature.home.Home
-
 import android.util.Pair as UtilPair
 
 class Splash : AppCompatActivity() {
+
+    val repository: Repository = Repository()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
@@ -27,6 +29,17 @@ class Splash : AppCompatActivity() {
             }
 
         }.start()
+
+        Thread { svaeDataToDb() }
+
+    }
+
+    fun svaeDataToDb() {
+
+        repository.addWord(WordItem(R.drawable.a, "a", ""))
+        repository.addWord(WordItem(R.drawable.b, "b", ""))
+        repository.addWord(WordItem(R.drawable.c, "c", ""))
+        repository.addWord(WordItem(R.drawable.d, "d", ""))
     }
 
     private fun startTranistion() {
@@ -37,7 +50,6 @@ class Splash : AppCompatActivity() {
                 UtilPair.create(tvMainSplash, "main"),
                 UtilPair.create(tvSubSplash, "sub")
         )
-        // intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_NO_HISTORY
         startActivity(intent, option.toBundle())
     }
 }

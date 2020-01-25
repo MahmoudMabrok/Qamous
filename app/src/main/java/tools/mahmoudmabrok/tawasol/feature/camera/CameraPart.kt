@@ -12,8 +12,6 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.core.*
-import androidx.camera.core.impl.ImageCaptureConfig
-import androidx.camera.core.impl.PreviewConfig
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import kotlinx.android.synthetic.main.activity_camera_part.*
@@ -27,6 +25,8 @@ import java.util.concurrent.Executors
 
 class CameraPart : AppCompatActivity(), ImageCapture.OnImageSavedListener {
 
+
+    private lateinit var pBar: ProgressDialog
 
     /**
      * permission code to be identified.
@@ -203,15 +203,16 @@ class CameraPart : AppCompatActivity(), ImageCapture.OnImageSavedListener {
     override fun onImageSaved(file: File) {
         val msg = "Photo capture succeeded: ${file.absolutePath}"
         cameraView.post {
-            Toast.makeText(baseContext, msg, Toast.LENGTH_SHORT).show()
+            //  Toast.makeText(baseContext, msg, Toast.LENGTH_SHORT).show()
+            pBar = ProgressDialog(this)
+            pBar.setCancelable(false)
+            pBar.show()
+
         }
 
         val bitmap = BitmapFactory.decodeFile(file.path)
         //todo  add indicator for loading
         if ((bitmap != null) && (classifer.isInitialized)) {
-            val pBar = ProgressDialog(this)
-            pBar.setCancelable(false)
-            pBar.show()
             classifer
                     .classifyAsync(bitmap)
                     .addOnSuccessListener { resultText ->
