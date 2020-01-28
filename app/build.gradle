@@ -1,6 +1,8 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
+
 
 android {
     compileSdkVersion 29
@@ -79,9 +81,9 @@ dependencies {
 
     def lifecycle_version = '2.0.0-beta01'
     implementation "androidx.room:room-runtime:$lifecycle_version"
-    annotationProcessor "androidx.room:room-compiler:$lifecycle_version"
+    kapt "androidx.room:room-compiler:$lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
-    annotationProcessor "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
+    kapt "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
 
     def koinVersion = "2.0.1"
     implementation "org.koin:koin-androidx-scope:$koinVersion"

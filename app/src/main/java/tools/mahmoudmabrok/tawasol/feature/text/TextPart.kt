@@ -3,10 +3,12 @@ package tools.mahmoudmabrok.tawasol.feature.text
 import android.os.Bundle
 import android.os.Handler
 import androidx.appcompat.app.AppCompatActivity
+import androidx.room.Room
 import kotlinx.android.synthetic.main.activity_test_part.*
 import org.koin.android.ext.android.inject
 import tools.mahmoudmabrok.tawasol.R
 import tools.mahmoudmabrok.tawasol.data.Repository
+import tools.mahmoudmabrok.tawasol.data.local.WordDB
 import tools.mahmoudmabrok.tawasol.feature.camera.CameraPart
 import tools.mahmoudmabrok.tawasol.utils.*
 
@@ -31,6 +33,7 @@ class TextPart : AppCompatActivity() {
 
         repo = Repository(this)
 
+
         imBackFromText.setOnClickListener {
             it.animateItemWithAction { finish() }
         }
@@ -43,6 +46,9 @@ class TextPart : AppCompatActivity() {
         }
 
         imAction.setOnClickListener {
+            // clear resList
+            resList.clear()
+
             this.dismissKeyboard()
             val input = edText.text.toString().clear()
             tvResultText.text = input
@@ -53,7 +59,6 @@ class TextPart : AppCompatActivity() {
                 tvResultText.text = "Not Found"
             }
         }
-
     }
 
     override fun onResume() {
@@ -65,12 +70,13 @@ class TextPart : AppCompatActivity() {
         // make sure it contains text
         if (!text.isBlank()) {
             "process: $text".log()
+            tvResultText.text = text
             // split text into sentences, process each one
             var resID = -1
             text.split(" ").forEach {
                 // get resID from db, non-positive values means not found so will parse it char by char
                 resID = repo.getResID(it)
-                "id: $resID t: $it"
+                "id: $resID t: $it".log()
                 when {
                     resID > 0 -> {
                         resList.add(ImageItem(it, resID))
@@ -80,7 +86,7 @@ class TextPart : AppCompatActivity() {
                         it.forEach {
                             // handle it char by char
                             resID = repo.getResID(it.toString())
-                            "## id: $resID t: $it"
+                            "## id: $resID t: $it".log()
                             resList.add(ImageItem(it.toString(), resID))
                         }
                     }
@@ -105,7 +111,6 @@ class TextPart : AppCompatActivity() {
     }
 
     private fun processImageItem(it: ImageItem) {
-        "pp :${it.resID}".log()
         imResult.setImageResource(it.resID)
         tvResultText.text = it.text
         imResult.animItem()

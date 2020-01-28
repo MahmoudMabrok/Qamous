@@ -19,7 +19,7 @@ fun String.log() {
 }
 
 fun String.clear(): String {
-    return this.filter { it.isLetter() }
+    return this.filter { it.isLetterOrDigit() }
 }
 
 fun Context.show(msg: String) {
