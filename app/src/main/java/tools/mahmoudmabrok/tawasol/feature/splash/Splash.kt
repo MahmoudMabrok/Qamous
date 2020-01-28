@@ -40,6 +40,13 @@ class Splash : AppCompatActivity() {
         repository.addWord(WordItem(R.drawable.b, "b", ""))
         repository.addWord(WordItem(R.drawable.c, "c", ""))
         repository.addWord(WordItem(R.drawable.d, "d", ""))
+        repository.addWord(WordItem(R.drawable.alph, "أ", ""))
+
+        repository.addWord(WordItem(R.drawable.alplam, "ال", ""))
+        repository.addWord(WordItem(R.drawable.ba, "ب", ""))
+
+        repository.addWord(WordItem(R.drawable.a0, "0", ""))
+        repository.addWord(WordItem(R.drawable.a1, "1", ""))
     }
 
     private fun startTranistion() {

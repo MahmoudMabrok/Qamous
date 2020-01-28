@@ -60,7 +60,7 @@ dependencies {
     implementation 'com.intuit.sdp:sdp-android:1.0.6'
     implementation 'com.intuit.ssp:ssp-android:1.0.6'
 
-    def tf = "0.0.0-nightly"
+  /*  def tf = "0.0.0-nightly"
     implementation "org.tensorflow:tensorflow-lite:$tf"
     implementation "org.tensorflow:tensorflow-lite-gpu:$tf"
     // Use local TensorFlow library
@@ -70,7 +70,7 @@ dependencies {
     implementation "com.google.android.gms:play-services-tasks:17.0.0"
 
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.3'
-
+*/
     // Use the most recent version of CameraX, currently that is alpha06.
     def camerax_version = '1.0.0-alpha06'
     implementation "androidx.camera:camera-core:${camerax_version}"

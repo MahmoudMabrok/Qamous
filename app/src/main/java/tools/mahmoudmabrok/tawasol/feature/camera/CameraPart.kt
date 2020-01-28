@@ -23,24 +23,37 @@ import tools.mahmoudmabrok.tawasol.utils.show
 import java.io.File
 import java.util.concurrent.Executors
 
+class CameraPart : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_camera_part)
+    }
+}
+
+
+/*
+
 class CameraPart : AppCompatActivity(), ImageCapture.OnImageSavedListener {
 
 
     private lateinit var pBar: ProgressDialog
 
-    /**
+    */
+/**
      * permission code to be identified.
-     */
+ *//*
     private val REQUEST_CODE_PERMISSIONS = 10
 
-    /**
+    */
+/**
      * This is an array of all the permission specified in the manifest.
-     */
+ *//*
     private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
 
-    /**
+    */
+/**
      * classifer object  uses context to get access to assets folder to load model.
-     */
+ *//*
     private val classifer = Classifier(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -171,10 +184,11 @@ class CameraPart : AppCompatActivity(), ImageCapture.OnImageSavedListener {
         cameraView.setTransform(matrix)
     }
 
-    /**
+    */
+/**
      * Process result from permission request dialog box, has the request
      * been granted? If yes, start Camera. Otherwise display a toast
-     */
+ *//*
     override fun onRequestPermissionsResult(
             requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
         if (requestCode == REQUEST_CODE_PERMISSIONS) {
@@ -189,17 +203,19 @@ class CameraPart : AppCompatActivity(), ImageCapture.OnImageSavedListener {
         }
     }
 
-    /**
+    */
+/**
      * Check if all permission specified in the manifest have been granted
-     */
+ *//*
     private fun allPermissionsGranted() = REQUIRED_PERMISSIONS.all {
         ContextCompat.checkSelfPermission(
                 baseContext, it) == PackageManager.PERMISSION_GRANTED
     }
 
-    /**
+    */
+/**
      * called when capture image and it saved to disk
-     */
+ *//*
     override fun onImageSaved(file: File) {
         val msg = "Photo capture succeeded: ${file.absolutePath}"
         cameraView.post {
@@ -242,4 +258,4 @@ class CameraPart : AppCompatActivity(), ImageCapture.OnImageSavedListener {
 
 
 
-}
+}*/
