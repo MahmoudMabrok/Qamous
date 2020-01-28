@@ -4,19 +4,30 @@ import android.os.Bundle
 import android.os.Handler
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_test_part.*
+import org.koin.android.ext.android.inject
 import tools.mahmoudmabrok.tawasol.R
+import tools.mahmoudmabrok.tawasol.data.Repository
 import tools.mahmoudmabrok.tawasol.feature.camera.CameraPart
 import tools.mahmoudmabrok.tawasol.utils.*
 
 
+data class ImageItem(val text: String, val resID: Int)
+
+
 class TextPart : AppCompatActivity() {
+
+    /**
+     * list to hold each image res id along with its text to be displayed
+     * */
+    val resList = mutableListOf<ImageItem>()
+    /**
+     * Repository reference by injection, to access local db methods
+     */
+    val repo: Repository by inject()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_test_part)
-
-        /*  setSupportActionBar(textToolbar)
-          supportActionBar?.setHomeButtonEnabled(true)
-        */
 
         imBackFromText.setOnClickListener {
             it.animateItemWithAction { finish() }
@@ -31,10 +42,10 @@ class TextPart : AppCompatActivity() {
 
         imAction.setOnClickListener {
             this.dismissKeyboard()
-            val name = edText.text.toString().clear()
-            tvResultText.text = name
+            val input = edText.text.toString().clear()
+            tvResultText.text = input
             try {
-                process(name)
+                process(input)
             } catch (e: Exception) {
                 tvResultText.text = "Not Found"
             }
@@ -48,34 +59,48 @@ class TextPart : AppCompatActivity() {
     }
 
     private fun process(text: String) {
+        // make sure it contains text
         if (!text.isBlank()) {
-            when {
-                // input found on drawable so place it directly
-                this.isExists(text) ->{
-                    processNameIntoImage(text)
-                }
-                // not found so split it into separates char and display it.
-                else -> {
-                    handleEachCharSep(text)
+            // split text into sentences, process each one
+            var resID = -1
+            text.split(" ").forEach {
+                // get resID from db, non-positive values means not found so will parse it char by char
+                resID = repo.getResID(it)
+                when {
+                    resID > 0 -> {
+                        resList.add(ImageItem(it, resID))
+                    }
+                    else -> {
+                        // not found, loop through all chars.
+                        it.forEach {
+                            // handle it char by char
+                            resID = repo.getResID(it.toString())
+                            resList.add(ImageItem(it.toString(), resID))
+                        }
+                    }
                 }
             }
+
+            // display them in UI
+            handleResults()
+
         }
     }
 
-    private fun handleEachCharSep(text: String) {
+    private fun handleResults() {
         val hanlder = Handler()
         var s = 1
-        for (name in text.toCharArray()) {
+        resList.forEach {
             hanlder.postDelayed({
-                processNameIntoImage(name.toString())
+                processImageItem(it)
             }, ((s * 700).toLong()))
             s++
         }
     }
 
-    private fun processNameIntoImage(name: String) {
-        imResult.setImageDrawable(this.getImage(name))
-        tvResultText.text = name
+    private fun processImageItem(it: ImageItem) {
+        imResult.setImageResource(it.resID)
+        tvResultText.text = it.text
         imResult.animItem()
     }
 }
