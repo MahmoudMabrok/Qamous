@@ -23,11 +23,13 @@ class TextPart : AppCompatActivity() {
     /**
      * Repository reference by injection, to access local db methods
      */
-    val repo: Repository by inject()
+    lateinit var repo: Repository
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_test_part)
+
+        repo = Repository(this)
 
         imBackFromText.setOnClickListener {
             it.animateItemWithAction { finish() }
@@ -47,6 +49,7 @@ class TextPart : AppCompatActivity() {
             try {
                 process(input)
             } catch (e: Exception) {
+                e.localizedMessage.log()
                 tvResultText.text = "Not Found"
             }
         }
@@ -61,11 +64,13 @@ class TextPart : AppCompatActivity() {
     private fun process(text: String) {
         // make sure it contains text
         if (!text.isBlank()) {
+            "process: $text".log()
             // split text into sentences, process each one
             var resID = -1
             text.split(" ").forEach {
                 // get resID from db, non-positive values means not found so will parse it char by char
                 resID = repo.getResID(it)
+                "id: $resID t: $it"
                 when {
                     resID > 0 -> {
                         resList.add(ImageItem(it, resID))
@@ -75,6 +80,7 @@ class TextPart : AppCompatActivity() {
                         it.forEach {
                             // handle it char by char
                             resID = repo.getResID(it.toString())
+                            "## id: $resID t: $it"
                             resList.add(ImageItem(it.toString(), resID))
                         }
                     }
@@ -99,6 +105,7 @@ class TextPart : AppCompatActivity() {
     }
 
     private fun processImageItem(it: ImageItem) {
+        "pp :${it.resID}".log()
         imResult.setImageResource(it.resID)
         tvResultText.text = it.text
         imResult.animItem()

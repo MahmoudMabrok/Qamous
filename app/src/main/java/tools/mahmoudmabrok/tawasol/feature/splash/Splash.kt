@@ -6,15 +6,16 @@ import android.os.Bundle
 import android.os.CountDownTimer
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_splash.*
+import org.koin.android.ext.android.inject
 import tools.mahmoudmabrok.tawasol.R
 import tools.mahmoudmabrok.tawasol.data.Repository
 import tools.mahmoudmabrok.tawasol.data.local.WordItem
 import tools.mahmoudmabrok.tawasol.feature.home.Home
+import tools.mahmoudmabrok.tawasol.utils.log
 import android.util.Pair as UtilPair
 
 class Splash : AppCompatActivity() {
 
-    val repository: Repository = Repository()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,12 +31,17 @@ class Splash : AppCompatActivity() {
 
         }.start()
 
-        Thread { svaeDataToDb() }
+        try {
+            // Thread {  }
+            svaeDataToDb()
+        } catch (e: Exception) {
+            "splash ${e.localizedMessage}".log()
+        }
 
     }
 
     fun svaeDataToDb() {
-
+        val repository = Repository(this)
         repository.addWord(WordItem(R.drawable.a, "a", ""))
         repository.addWord(WordItem(R.drawable.b, "b", ""))
         repository.addWord(WordItem(R.drawable.c, "c", ""))
@@ -47,6 +53,8 @@ class Splash : AppCompatActivity() {
 
         repository.addWord(WordItem(R.drawable.a0, "0", ""))
         repository.addWord(WordItem(R.drawable.a1, "1", ""))
+
+
     }
 
     private fun startTranistion() {
