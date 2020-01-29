@@ -1,34 +1,44 @@
 package tools.mahmoudmabrok.tawasol.feature.camera
 
+import android.Manifest
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.ProgressDialog
 import android.content.Intent
-import android.graphics.Bitmap
+import android.content.pm.PackageManager
 import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.provider.MediaStore
-import android.widget.ProgressBar
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_camera_part.*
 import tools.mahmoudmabrok.tawasol.R
 import tools.mahmoudmabrok.tawasol.utils.log
-import tools.mahmoudmabrok.tawasol.utils.show
+
+import android.graphics.Bitmap
+
+import android.widget.Toast
 
 class CameraPart : AppCompatActivity() {
     private lateinit var pBar: ProgressDialog
     private val camerReqCode: Int = 1001
+    private val MY_CAMERA_PERMISSION_CODE: Int = 1002
 
     private val classifer = Classifier(this)
 
+    @SuppressLint("NewApi")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_camera_part)
 
         takeImage.setOnClickListener {
-            // go to pick image
-            val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-            startActivityForResult(intent, camerReqCode)
+            if (checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                requestPermissions(arrayOf(Manifest.permission.CAMERA), MY_CAMERA_PERMISSION_CODE)
+            } else {
+                // go to pick image
+                val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+                startActivityForResult(intent, camerReqCode)
+            }
+
         }
 
         classifer
@@ -38,24 +48,39 @@ class CameraPart : AppCompatActivity() {
 
     }
 
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
         if (resultCode == Activity.RESULT_OK && requestCode == camerReqCode) {
-            if (data != null) {
-                // get URI from intent
-                val uri = data.data
+            if (null != data) {
+		try{
+
+
+            val thumbnail = data!!.extras!!.get("data") as Bitmap
+
+		cameraView.setImageBitmap(thumbnail)
+
+               /*
+ // get URI from intent
+                val uri = data?.data
+
+
+Toast.makeText(this, "B", Toast.LENGTH_SHORT).show()
+		
                 // place captured image to view
                 cameraView.setImageURI(uri)
                 // get bitmap to be used with model
                 val bitmap = BitmapFactory.decodeStream(contentResolver.openInputStream(uri!!))
+
+*/
                 // start model
-                if ((bitmap != null) && (classifer.isInitialized)) {
+                if ((thumbnail != null) && (classifer.isInitialized)) {
                     pBar = ProgressDialog(this)
                     pBar.setMessage("Predicting")
                     pBar.show()
                     classifer
-                            .classifyAsync(bitmap)
+                            .classifyAsync(thumbnail)
                             .addOnSuccessListener { resultText ->
                                 pBar.dismiss()
                                 tvResultCamera.text = resultText
@@ -67,6 +92,10 @@ class CameraPart : AppCompatActivity() {
                 } else {
                     "NOt able to load".log()
                 }
+
+}catch(e:Exception){
+	Toast.makeText(this, e.localizedMessage, Toast.LENGTH_SHORT).show()
+}
 
 
             }

@@ -2,7 +2,7 @@
     <string name="app_name">Qamous</string>
     <string name="appName">Qamous</string>
     <string name="appDescription1">App Communicate Natural Language Into Sign Language and Vice versa</string>
-    <string name="appDescription"><tt>Translates</tt> from/into <b>Sign Language</b> into/from <i>Natural Language</i> </string>
+    <string name="appDescription">Translates from/into Sign Language into/from Natural Language </string>
     <string name="write_text">Write Text</string>
     <string name="open_camera">Open Camera</string>
     <string name="enter_text_here">Enter Text Here</string>
