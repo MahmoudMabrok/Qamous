@@ -52,28 +52,39 @@
         android:layout_weight="1"
         tools:context=".MainActivity">
 
-        <TextureView
+        <ImageView
             android:id="@+id/cameraView"
             android:layout_width="409dp"
-            android:layout_height="656dp"
+            android:layout_height="@dimen/_300sdp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.578"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.563" />
+            app:layout_constraintVertical_bias="0.003" />
 
         <Button
             android:id="@+id/takeImage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="40dp"
+            android:layout_marginTop="60dp"
             android:drawableEnd="@android:drawable/ic_menu_camera"
             android:text="Capture"
-            app:layout_constraintBottom_toBottomOf="@+id/cameraView"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.532"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cameraView" />
+
+        <TextView
+            android:id="@+id/tvResultCamera"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="48dp"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/takeImage" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
