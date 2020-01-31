@@ -54,20 +54,17 @@
 
         <ImageView
             android:id="@+id/cameraView"
-            android:layout_width="409dp"
+            android:layout_width="match_parent"
             android:layout_height="@dimen/_300sdp"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.003" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/takeImage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="52dp"
             android:drawableEnd="@android:drawable/ic_menu_camera"
             android:text="Capture"
             app:layout_constraintEnd_toEndOf="parent"
@@ -79,12 +76,12 @@
             android:id="@+id/tvResultCamera"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="48dp"
+            android:layout_marginBottom="88dp"
             android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/takeImage" />
+            app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

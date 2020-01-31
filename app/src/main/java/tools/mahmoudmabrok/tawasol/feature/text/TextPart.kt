@@ -20,19 +20,17 @@ class TextPart : AppCompatActivity() {
 
     /**
      * list to hold each image res id along with its text to be displayed
-     * */
+     **/
     val resList = mutableListOf<ImageItem>()
+
     /**
      * Repository reference by injection, to access local db methods
      */
-    lateinit var repo: Repository
+    val repo: Repository by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_test_part)
-
-        repo = Repository(this)
-
 
         imBackFromText.setOnClickListener {
             it.animateItemWithAction { finish() }

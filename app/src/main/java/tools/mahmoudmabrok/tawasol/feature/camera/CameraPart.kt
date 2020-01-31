@@ -6,17 +6,17 @@ import android.app.Activity
 import android.app.ProgressDialog
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.BitmapFactory
+import android.graphics.Bitmap
 import android.os.Bundle
 import android.provider.MediaStore
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_camera_part.*
+import kotlinx.android.synthetic.main.activity_test_part.*
 import tools.mahmoudmabrok.tawasol.R
+import tools.mahmoudmabrok.tawasol.utils.animateItemWithAction
+import tools.mahmoudmabrok.tawasol.utils.goTo
 import tools.mahmoudmabrok.tawasol.utils.log
-
-import android.graphics.Bitmap
-
-import android.widget.Toast
 
 class CameraPart : AppCompatActivity() {
     private lateinit var pBar: ProgressDialog
@@ -30,6 +30,19 @@ class CameraPart : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_camera_part)
 
+
+        imBackFromCamera.setOnClickListener {
+            it.animateItemWithAction { finish() }
+        }
+
+        imOpenText.setOnClickListener {
+            it.animateItemWithAction {
+                this.goTo(CameraPart::class.java)
+                finish()
+            }
+        }
+
+
         takeImage.setOnClickListener {
             if (checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
                 requestPermissions(arrayOf(Manifest.permission.CAMERA), MY_CAMERA_PERMISSION_CODE)
@@ -38,13 +51,11 @@ class CameraPart : AppCompatActivity() {
                 val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
                 startActivityForResult(intent, camerReqCode)
             }
-
         }
 
         classifer
                 .initialize()
                 .addOnFailureListener { e -> "Error to setting up digit classifer, ${e.localizedMessage}".log() }
-
 
     }
 
@@ -54,48 +65,47 @@ class CameraPart : AppCompatActivity() {
 
         if (resultCode == Activity.RESULT_OK && requestCode == camerReqCode) {
             if (null != data) {
-		try{
+                try {
+
+                    val thumbnail = data!!.extras!!.get("data") as Bitmap
+
+                    cameraView.setImageBitmap(thumbnail)
+
+                    /*
+      // get URI from intent
+                     val uri = data?.data
 
 
-            val thumbnail = data!!.extras!!.get("data") as Bitmap
+     Toast.makeText(this, "B", Toast.LENGTH_SHORT).show()
 
-		cameraView.setImageBitmap(thumbnail)
+                     // place captured image to view
+                     cameraView.setImageURI(uri)
+                     // get bitmap to be used with model
+                     val bitmap = BitmapFactory.decodeStream(contentResolver.openInputStream(uri!!))
 
-               /*
- // get URI from intent
-                val uri = data?.data
+     */
+                    // start model
+                    if (classifer.isInitialized) {
+                        pBar = ProgressDialog(this)
+                        pBar.setMessage("Predicting")
+                        pBar.show()
+                        classifer
+                                .classifyAsync(thumbnail)
+                                .addOnSuccessListener { resultText ->
+                                    pBar.dismiss()
+                                    tvResultCamera.text = resultText
+                                }
+                                .addOnFailureListener { e ->
+                                    pBar.dismiss()
+                                    tvResultCamera.text = e.localizedMessage
+                                }
+                    } else {
+                        "NOt able to load".log()
+                    }
 
-
-Toast.makeText(this, "B", Toast.LENGTH_SHORT).show()
-		
-                // place captured image to view
-                cameraView.setImageURI(uri)
-                // get bitmap to be used with model
-                val bitmap = BitmapFactory.decodeStream(contentResolver.openInputStream(uri!!))
-
-*/
-                // start model
-                if ((thumbnail != null) && (classifer.isInitialized)) {
-                    pBar = ProgressDialog(this)
-                    pBar.setMessage("Predicting")
-                    pBar.show()
-                    classifer
-                            .classifyAsync(thumbnail)
-                            .addOnSuccessListener { resultText ->
-                                pBar.dismiss()
-                                tvResultCamera.text = resultText
-                            }
-                            .addOnFailureListener { e ->
-                                pBar.dismiss()
-                                tvResultCamera.text = e.localizedMessage
-                            }
-                } else {
-                    "NOt able to load".log()
+                } catch (e: Exception) {
+                    Toast.makeText(this, e.localizedMessage, Toast.LENGTH_SHORT).show()
                 }
-
-}catch(e:Exception){
-	Toast.makeText(this, e.localizedMessage, Toast.LENGTH_SHORT).show()
-}
 
 
             }

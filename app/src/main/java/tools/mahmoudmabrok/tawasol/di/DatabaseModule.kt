@@ -10,7 +10,7 @@ import tools.mahmoudmabrok.tawasol.data.local.WordDB
 val databaseModule = module {
 
 
-  //  single { Repository(get())}
+    single { Repository() }
 
 
 /*

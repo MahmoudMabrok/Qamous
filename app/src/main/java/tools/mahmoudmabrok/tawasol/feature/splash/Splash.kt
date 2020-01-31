@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.os.CountDownTimer
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_splash.*
+import org.koin.android.ext.android.inject
 import tools.mahmoudmabrok.tawasol.R
 import tools.mahmoudmabrok.tawasol.data.Repository
 import tools.mahmoudmabrok.tawasol.data.local.WordItem
@@ -15,6 +16,7 @@ import android.util.Pair as UtilPair
 
 class Splash : AppCompatActivity() {
 
+    val repository: Repository by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,8 +33,10 @@ class Splash : AppCompatActivity() {
         }.start()
 
         try {
-            // Thread {  }
-            svaeDataToDb()
+            Thread {
+                svaeDataToDb()
+            }
+
         } catch (e: Exception) {
             "splash ${e.localizedMessage}".log()
         }
@@ -40,7 +44,7 @@ class Splash : AppCompatActivity() {
     }
 
     fun svaeDataToDb() {
-        val repository = Repository(this)
+
 
         repository.addWord(WordItem(R.drawable.a, "a", ""))
         repository.addWord(WordItem(R.drawable.b, "b", ""))
