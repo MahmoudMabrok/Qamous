@@ -57,6 +57,8 @@ class TextPart : AppCompatActivity() {
                 tvResultText.text = "Not Found"
             }
         }
+
+        //todo  add icon lsinter feature
     }
 
     override fun onResume() {

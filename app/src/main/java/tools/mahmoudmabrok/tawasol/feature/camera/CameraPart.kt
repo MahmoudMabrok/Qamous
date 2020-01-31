@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_camera_part.*
 import kotlinx.android.synthetic.main.activity_test_part.*
 import tools.mahmoudmabrok.tawasol.R
+import tools.mahmoudmabrok.tawasol.feature.text.TextPart
 import tools.mahmoudmabrok.tawasol.utils.animateItemWithAction
 import tools.mahmoudmabrok.tawasol.utils.goTo
 import tools.mahmoudmabrok.tawasol.utils.log
@@ -37,7 +38,7 @@ class CameraPart : AppCompatActivity() {
 
         imOpenText.setOnClickListener {
             it.animateItemWithAction {
-                this.goTo(CameraPart::class.java)
+                this.goTo(TextPart::class.java)
                 finish()
             }
         }
