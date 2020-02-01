@@ -46,44 +46,48 @@
     </LinearLayout>
 
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
+        android:orientation="vertical"
         tools:context=".MainActivity">
 
         <ImageView
             android:id="@+id/cameraView"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_300sdp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="@dimen/_16sdp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            android:layout_weight="1"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <Button
-            android:id="@+id/takeImage"
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_16sdp"
+            android:gravity="center_horizontal"
+            android:padding="@dimen/_6sdp"
+            android:text="@string/select_option_from_list_below" />
+
+        <Spinner
+            android:id="@+id/spOptions"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="52dp"
-            android:drawableEnd="@android:drawable/ic_menu_camera"
-            android:text="Capture"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cameraView" />
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_horizontal" />
 
         <TextView
             android:id="@+id/tvResultCamera"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="88dp"
+            android:layout_marginBottom="@dimen/_16sdp"
             android:textSize="24sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent" />
+            android:gravity="center_horizontal" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 
 
 </LinearLayout>

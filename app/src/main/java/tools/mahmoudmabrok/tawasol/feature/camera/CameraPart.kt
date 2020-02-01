@@ -9,24 +9,29 @@ import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.provider.MediaStore
+import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_camera_part.*
-import kotlinx.android.synthetic.main.activity_test_part.*
 import tools.mahmoudmabrok.tawasol.R
 import tools.mahmoudmabrok.tawasol.feature.text.TextPart
 import tools.mahmoudmabrok.tawasol.utils.animateItemWithAction
 import tools.mahmoudmabrok.tawasol.utils.goTo
 import tools.mahmoudmabrok.tawasol.utils.log
 
+@SuppressLint("NewApi")
 class CameraPart : AppCompatActivity() {
     private lateinit var pBar: ProgressDialog
     private val camerReqCode: Int = 1001
     private val MY_CAMERA_PERMISSION_CODE: Int = 1002
 
-    private val classifer = Classifier(this)
+    private val numClassifer = NumberClassifier(this)
+    private val enClassifer = EnglishWordsClassifier(this)
 
-    @SuppressLint("NewApi")
+    private var selectedOption = "NA"
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_camera_part)
@@ -43,21 +48,49 @@ class CameraPart : AppCompatActivity() {
             }
         }
 
+        initSpinner()
 
-        takeImage.setOnClickListener {
-            if (checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-                requestPermissions(arrayOf(Manifest.permission.CAMERA), MY_CAMERA_PERMISSION_CODE)
-            } else {
-                // go to pick image
-                val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-                startActivityForResult(intent, camerReqCode)
-            }
-        }
-
-        classifer
+        numClassifer
                 .initialize()
                 .addOnFailureListener { e -> "Error to setting up digit classifer, ${e.localizedMessage}".log() }
 
+        enClassifer
+                .initialize()
+                .addOnFailureListener { e -> "Error to setting up digit classifer, ${e.localizedMessage}".log() }
+
+
+    }
+
+    /**
+     * init spinner by adding names of classifier option already implemented
+     */
+    private fun initSpinner() {
+        val options = arrayOf(NumberClassifier.NAME, EnglishWordsClassifier.NAME)
+        val adapter = ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, options)
+        spOptions.adapter = adapter
+        spOptions.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                selectedOption = "NA"
+            }
+
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                // call app to pick image and return
+                callCameraApp()
+                // store selected option to be used after return from capturing image
+                selectedOption = options[position]
+            }
+
+        }
+    }
+
+    private fun callCameraApp() {
+        if (checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(arrayOf(Manifest.permission.CAMERA), MY_CAMERA_PERMISSION_CODE)
+        } else {
+            // go to pick image
+            val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+            startActivityForResult(intent, camerReqCode)
+        }
     }
 
 
@@ -86,20 +119,38 @@ class CameraPart : AppCompatActivity() {
 
      */
                     // start model
-                    if (classifer.isInitialized) {
+                    if (numClassifer.isInitialized && enClassifer.isInitialized) {
                         pBar = ProgressDialog(this)
                         pBar.setMessage("Predicting")
                         pBar.show()
-                        classifer
-                                .classifyAsync(thumbnail)
-                                .addOnSuccessListener { resultText ->
-                                    pBar.dismiss()
-                                    tvResultCamera.text = resultText
-                                }
-                                .addOnFailureListener { e ->
-                                    pBar.dismiss()
-                                    tvResultCamera.text = e.localizedMessage
-                                }
+                        when (selectedOption) {
+                            NumberClassifier.NAME -> {
+                                numClassifer
+                                        .classifyAsync(thumbnail)
+                                        .addOnSuccessListener { resultText ->
+                                            pBar.dismiss()
+                                            tvResultCamera.text = resultText
+                                        }
+                                        .addOnFailureListener { e ->
+                                            pBar.dismiss()
+                                            tvResultCamera.text = e.localizedMessage
+                                        }
+                            }
+                            EnglishWordsClassifier.NAME -> {
+                                enClassifer
+                                        .classifyAsync(thumbnail)
+                                        .addOnSuccessListener { resultText ->
+                                            pBar.dismiss()
+                                            tvResultCamera.text = resultText
+                                        }
+                                        .addOnFailureListener { e ->
+                                            pBar.dismiss()
+                                            tvResultCamera.text = e.localizedMessage
+                                        }
+                            }
+
+                            else -> return
+                        }
                     } else {
                         "NOt able to load".log()
                     }

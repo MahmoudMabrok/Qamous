@@ -9,4 +9,5 @@
     <string name="enter_text_here">Enter Text Here</string>
     <string name="test">abc</string>
     <string name="contact_us">Contact Us</string>
+    <string name="select_option_from_list_below">Select Option from List below</string>
 </resources>

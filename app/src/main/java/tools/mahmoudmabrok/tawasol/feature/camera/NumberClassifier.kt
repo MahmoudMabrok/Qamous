@@ -6,6 +6,8 @@ import android.graphics.Bitmap
 import android.util.Log
 import com.google.android.gms.tasks.Task
 import com.google.android.gms.tasks.Tasks.call
+import org.tensorflow.lite.Interpreter
+import tools.mahmoudmabrok.tawasol.utils.log
 import java.io.FileInputStream
 import java.io.IOException
 import java.nio.ByteBuffer
@@ -14,11 +16,10 @@ import java.nio.channels.FileChannel
 import java.util.concurrent.Callable
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
-import org.tensorflow.lite.Interpreter
-import tools.mahmoudmabrok.tawasol.utils.log
 
 
-class Classifier(private val context: Context) {
+class NumberClassifier(private val context: Context) {
+
     private var interpreter: Interpreter? = null
     var isInitialized = false
         private set
@@ -151,6 +152,7 @@ class Classifier(private val context: Context) {
     }
 
     companion object {
+        const val NAME = "Number"
         private const val TAG = "TestApp"
 
         private const val FLOAT_TYPE_SIZE = 4
