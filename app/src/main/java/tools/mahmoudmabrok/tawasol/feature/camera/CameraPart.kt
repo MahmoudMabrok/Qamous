@@ -48,8 +48,6 @@ class CameraPart : AppCompatActivity() {
             }
         }
 
-        initSpinner()
-
         numClassifer
                 .initialize()
                 .addOnFailureListener { e -> "Error to setting up digit classifer, ${e.localizedMessage}".log() }
@@ -59,13 +57,25 @@ class CameraPart : AppCompatActivity() {
                 .addOnFailureListener { e -> "Error to setting up digit classifer, ${e.localizedMessage}".log() }
 
 
+        initSpinner()
+
+        initPr()
+
+    }
+
+    private fun initPr() {
+        pBar = ProgressDialog(this)
+        pBar.setMessage("Predicting")
     }
 
     /**
      * init spinner by adding names of classifier option already implemented
      */
     private fun initSpinner() {
-        val options = arrayOf(NumberClassifier.NAME, EnglishWordsClassifier.NAME)
+        val options = arrayOf(getString(R.string.predict_msg),
+                NumberClassifier.NAME,
+                EnglishWordsClassifier.NAME)
+
         val adapter = ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, options)
         spOptions.adapter = adapter
         spOptions.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
@@ -74,10 +84,17 @@ class CameraPart : AppCompatActivity() {
             }
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                // call app to pick image and return
-                callCameraApp()
-                // store selected option to be used after return from capturing image
-                selectedOption = options[position]
+                // work for non-first item
+                "position$position id$id".log()
+                if (id > 0) {
+                    // call app to pick image and return
+                    callCameraApp()
+                    // store selected option to be used after return from capturing image
+                    // decrease it as first option is just label not type
+                    selectedOption = options[id.toInt()]
+                } else {
+                    selectedOption = "NA"
+                }
             }
 
         }
@@ -100,11 +117,8 @@ class CameraPart : AppCompatActivity() {
         if (resultCode == Activity.RESULT_OK && requestCode == camerReqCode) {
             if (null != data) {
                 try {
-
                     val thumbnail = data!!.extras!!.get("data") as Bitmap
-
                     cameraView.setImageBitmap(thumbnail)
-
                     /*
       // get URI from intent
                      val uri = data?.data
@@ -120,37 +134,40 @@ class CameraPart : AppCompatActivity() {
      */
                     // start model
                     if (numClassifer.isInitialized && enClassifer.isInitialized) {
-                        pBar = ProgressDialog(this)
-                        pBar.setMessage("Predicting")
                         pBar.show()
                         when (selectedOption) {
                             NumberClassifier.NAME -> {
+                                "StartNum".log()
                                 numClassifer
                                         .classifyAsync(thumbnail)
                                         .addOnSuccessListener { resultText ->
-                                            pBar.dismiss()
                                             tvResultCamera.text = resultText
+                                            "number success".log()
                                         }
                                         .addOnFailureListener { e ->
-                                            pBar.dismiss()
                                             tvResultCamera.text = e.localizedMessage
+                                            "number fail".log()
                                         }
                             }
                             EnglishWordsClassifier.NAME -> {
+                                "StartEN".log()
                                 enClassifer
                                         .classifyAsync(thumbnail)
                                         .addOnSuccessListener { resultText ->
-                                            pBar.dismiss()
                                             tvResultCamera.text = resultText
                                         }
                                         .addOnFailureListener { e ->
-                                            pBar.dismiss()
                                             tvResultCamera.text = e.localizedMessage
                                         }
                             }
-
-                            else -> return
+                            else -> {
+                                "Else".log()
+                                return
+                            }
                         }
+                        "After When".log()
+                        pBar.dismiss()
+
                     } else {
                         "NOt able to load".log()
                     }
@@ -158,10 +175,14 @@ class CameraPart : AppCompatActivity() {
                 } catch (e: Exception) {
                     Toast.makeText(this, e.localizedMessage, Toast.LENGTH_SHORT).show()
                 }
-
-
             }
         }
+    }
+
+    override fun onDestroy() {
+        numClassifer.close()
+        enClassifer.close()
+        super.onDestroy()
     }
 }
 
@@ -247,7 +268,6 @@ class CameraPart : AppCompatActivity(), ImageCapture.OnImageSavedListener {
             Toast.makeText(baseContext, msg, Toast.LENGTH_SHORT).show()
         }
     }
-
 
 
 }*/
