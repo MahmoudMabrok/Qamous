@@ -23,6 +23,9 @@ class EnglishWordsClassifier(private val context: Context) {
     var isInitialized = false
         private set
 
+
+    private lateinit var chars: List<String>
+
     /** Executor to run inference task in the background */
 
     private val executorService: ExecutorService = Executors.newCachedThreadPool()
@@ -32,6 +35,9 @@ class EnglishWordsClassifier(private val context: Context) {
     private var modelInputSize: Int = 0 // will be inferred from TF Lite model
 
     fun initialize(): Task<Void> {
+
+        initchars()
+
         return call(
                 executorService,
                 Callable<Void> {
@@ -39,6 +45,19 @@ class EnglishWordsClassifier(private val context: Context) {
                     null
                 }
         )
+    }
+
+    private fun initchars() {
+        val a = 'a'
+        chars = IntRange(0, 26).map {
+            (a + it).toString()
+        }
+        // filter out 'j', 'z'
+        chars.filter { !it.equals('j') and !it.equals('z') }
+    }
+
+    fun getChByIndex(pos: Int): String {
+        return chars[pos]
     }
 
     @Throws(IOException::class)

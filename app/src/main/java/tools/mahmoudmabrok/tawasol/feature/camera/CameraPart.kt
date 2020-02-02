@@ -20,6 +20,7 @@ import tools.mahmoudmabrok.tawasol.feature.text.TextPart
 import tools.mahmoudmabrok.tawasol.utils.animateItemWithAction
 import tools.mahmoudmabrok.tawasol.utils.goTo
 import tools.mahmoudmabrok.tawasol.utils.log
+import tools.mahmoudmabrok.tawasol.utils.show
 
 @SuppressLint("NewApi")
 class CameraPart : AppCompatActivity() {
@@ -86,12 +87,14 @@ class CameraPart : AppCompatActivity() {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 // work for non-first item
                 "position$position id$id".log()
+                // this@CameraPart.show("position$position id$id")
                 if (id > 0) {
                     // call app to pick image and return
                     callCameraApp()
                     // store selected option to be used after return from capturing image
                     // decrease it as first option is just label not type
                     selectedOption = options[id.toInt()]
+                    "selectedOption $selectedOption".log()
                 } else {
                     selectedOption = "NA"
                 }
@@ -153,8 +156,9 @@ class CameraPart : AppCompatActivity() {
                                 "StartEN".log()
                                 enClassifer
                                         .classifyAsync(thumbnail)
-                                        .addOnSuccessListener { resultText ->
-                                            tvResultCamera.text = resultText
+                                        .addOnSuccessListener { result ->
+                                            val index = Integer.parseInt(result)
+                                            tvResultCamera.text = enClassifer.getChByIndex(index)
                                         }
                                         .addOnFailureListener { e ->
                                             tvResultCamera.text = e.localizedMessage
