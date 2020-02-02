@@ -117,7 +117,7 @@ class CameraPart : AppCompatActivity() {
         if (resultCode == Activity.RESULT_OK && requestCode == camerReqCode) {
             if (null != data) {
                 try {
-                    val thumbnail = data!!.extras!!.get("data") as Bitmap
+                    val thumbnail = data.extras!!.get("data") as Bitmap
                     cameraView.setImageBitmap(thumbnail)
                     /*
       // get URI from intent
