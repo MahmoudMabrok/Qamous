@@ -44,6 +44,7 @@ class NumberClassifier(private val context: Context) {
 
     @Throws(IOException::class)
     private fun initializeInterpreter() {
+        "initializeInterpreter ".log()
         // Load the TF Lite model
         val assetManager = context.assets
         val model = loadModelFile(assetManager)
@@ -68,7 +69,8 @@ class NumberClassifier(private val context: Context) {
 
     @Throws(IOException::class)
     private fun loadModelFile(assetManager: AssetManager): ByteBuffer {
-        val fileDescriptor = assetManager.openFd(MODEL_FILE)
+        "loadModelFile  aa a".log()
+        val fileDescriptor = assetManager.openFd(MODEL_FILE2)
         val inputStream = FileInputStream(fileDescriptor.fileDescriptor)
         val fileChannel = inputStream.channel
         val startOffset = fileDescriptor.startOffset
@@ -146,9 +148,10 @@ class NumberClassifier(private val context: Context) {
     }
 
     private fun getOutputString(output: FloatArray): String {
-        "finish numbers".log()
+        "finish numbers $output ${output.map { it }}".log()
         val maxIndex = output.indices.maxBy { output[it] } ?: -1
         //return "Prediction Result: %d\nConfidence: %2f".format(maxIndex, output[maxIndex])
+        "getOutputString maxIndex $maxIndex ,,${output[maxIndex]}".log()
         return  maxIndex.toString()
     }
 
@@ -159,13 +162,13 @@ class NumberClassifier(private val context: Context) {
         private const val FLOAT_TYPE_SIZE = 4
 
         private const val MODEL_FILE = "foo.tflite"
+        private const val MODEL_FILE2 = "model.tflite"
 
        // private const val MODEL_FILE = "mnist.tflite"
 
          /**
          * color channels 3 means 3 colors so each pixel hold three values.
          */
-
         private const val PIXEL_SIZE = 1
 
         private const val OUTPUT_CLASSES_COUNT = 10

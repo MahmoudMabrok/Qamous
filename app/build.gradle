@@ -88,5 +88,7 @@ dependencies {
     implementation "org.koin:koin-androidx-scope:$koinVersion"
     implementation "org.koin:koin-androidx-viewmodel:$koinVersion"
 
+    implementation 'com.rmtheis:tess-two:9.1.0'
+
 
 }

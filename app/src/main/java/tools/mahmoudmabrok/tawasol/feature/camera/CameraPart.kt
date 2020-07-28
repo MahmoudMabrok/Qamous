@@ -51,12 +51,12 @@ class CameraPart : AppCompatActivity() {
 
         numClassifer
                 .initialize()
-                .addOnFailureListener { e -> "Error to setting up digit classifer, ${e.localizedMessage}".log() }
+                .addOnFailureListener { e -> "Error to setting up digit classifer, ${e.localizedMessage} 11, ${e.message}".log() }
 
-        enClassifer
-                .initialize()
-                .addOnFailureListener { e -> "Error to setting up digit classifer, ${e.localizedMessage}".log() }
-
+        /*   enClassifer
+                   .initialize()
+                   .addOnFailureListener { e -> "Error to setting up digit classifer, ${e.localizedMessage}".log() }
+   */
 
         initSpinner()
 
@@ -136,33 +136,37 @@ class CameraPart : AppCompatActivity() {
 
      */
                     // start model
-                    if (numClassifer.isInitialized && enClassifer.isInitialized) {
+
                         pBar.show()
                         when (selectedOption) {
                             NumberClassifier.NAME -> {
                                 "StartNum".log()
-                                numClassifer
-                                        .classifyAsync(thumbnail)
-                                        .addOnSuccessListener { resultText ->
-                                            tvResultCamera.text = resultText
-                                            "number success".log()
-                                        }
-                                        .addOnFailureListener { e ->
-                                            tvResultCamera.text = e.localizedMessage
-                                            "number fail".log()
-                                        }
+                                if (numClassifer.isInitialized) {
+                                    numClassifer
+                                            .classifyAsync(thumbnail)
+                                            .addOnSuccessListener { resultText ->
+                                                tvResultCamera.text = resultText
+                                                "number succes $resultText".log()
+                                            }
+                                            .addOnFailureListener { e ->
+                                                tvResultCamera.text = e.localizedMessage
+                                                "number fail ${e.message}".log()
+                                            }
+                                }
                             }
                             EnglishWordsClassifier.NAME -> {
                                 "StartEN".log()
-                                enClassifer
-                                        .classifyAsync(thumbnail)
-                                        .addOnSuccessListener { result ->
-                                            val index = Integer.parseInt(result)
-                                            tvResultCamera.text = enClassifer.getChByIndex(index)
-                                        }
-                                        .addOnFailureListener { e ->
-                                            tvResultCamera.text = e.localizedMessage
-                                        }
+                                if (enClassifer.isInitialized) {
+                                    enClassifer
+                                            .classifyAsync(thumbnail)
+                                            .addOnSuccessListener { result ->
+                                                val index = Integer.parseInt(result)
+                                                tvResultCamera.text = enClassifer.getChByIndex(index)
+                                            }
+                                            .addOnFailureListener { e ->
+                                                tvResultCamera.text = e.localizedMessage
+                                            }
+                                }
                             }
                             else -> {
                                 "Else".log()
@@ -172,9 +176,6 @@ class CameraPart : AppCompatActivity() {
                         "After When".log()
                         pBar.dismiss()
 
-                    } else {
-                        "NOt able to load".log()
-                    }
 
                 } catch (e: Exception) {
                     Toast.makeText(this, e.localizedMessage, Toast.LENGTH_SHORT).show()
