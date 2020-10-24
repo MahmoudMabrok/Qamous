@@ -1,5 +1,7 @@
 # Qamous
+
 [![HitCount](http://hits.dwyl.io/MahmoudMabrok/Qamous.svg)](http://hits.dwyl.io/MahmoudMabrok/Qamous)
+
 Translates from/into <strong>Sign Language</strong> into/from Natural Language
 
 # Screens
