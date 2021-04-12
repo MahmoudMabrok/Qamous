@@ -18,13 +18,13 @@ import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
 
-class NumberClassifier(private val context: Context) {
+class DissesClassifier(private val context: Context) {
 
     private var interpreter: Interpreter? = null
     var isInitialized = false
         private set
 
-/** Executor to run inference task in the background */
+    /** Executor to run inference task in the background */
 
     private val executorService: ExecutorService = Executors.newCachedThreadPool()
 
@@ -162,13 +162,13 @@ class NumberClassifier(private val context: Context) {
 
        // private const val MODEL_FILE = "mnist.tflite"
 
-         /**
+        /**
          * color channels 3 means 3 colors so each pixel hold three values.
          */
 
-        private const val PIXEL_SIZE = 1
+        private const val PIXEL_SIZE = 3
 
-        private const val OUTPUT_CLASSES_COUNT = 10
+        private const val OUTPUT_CLASSES_COUNT = 6
     }
 }
 

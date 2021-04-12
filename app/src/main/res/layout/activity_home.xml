@@ -4,75 +4,35 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@mipmap/splash"
+    android:background="#82BADB"
     tools:context=".feature.home.Home">
 
-
     <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="@dimen/logoDim"
-        android:layout_height="@dimen/logoDim"
-        android:layout_marginBottom="16dp"
-        android:src="@mipmap/ic_launcher_foreground"
-        android:transitionName="im"
-        app:layout_constraintBottom_toTopOf="@+id/textView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        android:id="@+id/imApp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scaleType="centerCrop"
+        android:src="@drawable/bg"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.29000002" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="10dp"
-        android:text="@string/appName"
+        android:text="Doctor"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textColor="@color/tvColorSplash"
         android:textSize="@dimen/mainFontSize"
         android:textStyle="bold"
         android:transitionName="main"
-        app:layout_constraintBottom_toTopOf="@+id/textView2"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="56dp"
-        android:gravity="center_horizontal"
-        android:text="@string/appDescription"
-        android:textAlignment="center"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textColor="@color/tvColorSplash"
-        android:textSize="@dimen/subFontSize"
-        android:transitionName="sub"
-        app:layout_constraintBottom_toTopOf="@+id/openCamer"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <include
-        android:id="@+id/openCamer"
-        layout="@layout/camer_layout"
-        android:layout_width="@dimen/categoryWidth"
-        android:layout_height="@dimen/categoryHeight"
-        android:layout_marginBottom="52dp"
-        app:layout_constraintBottom_toTopOf="@+id/openText"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <include
-        android:id="@+id/openText"
-        layout="@layout/text_layout"
-        android:layout_width="@dimen/categoryWidth"
-        android:layout_height="@dimen/categoryHeight"
-        android:layout_marginBottom="28dp"
-        app:layout_constraintBottom_toTopOf="@+id/button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/button"
@@ -82,13 +42,15 @@
         android:background="@drawable/support_btn_back"
         android:paddingStart="@dimen/_10sdp"
         android:paddingEnd="@dimen/_10sdp"
-        android:text="@string/contact_us"
+        android:text="@string/let_s_start"
         android:textAllCaps="false"
         android:textColor="@color/main"
         android:textSize="@dimen/contactFontSize"
         android:textStyle="normal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imApp"
+        app:layout_constraintVertical_bias="0.39" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -12,4 +12,5 @@
     <string name="select_option_from_list_below">Select Option from List below</string>
     <string name="predict_msg">Select Type to Predict</string>
     <string name="image">image</string>
+    <string name="let_s_start">Let\'s start</string>
 </resources>
