@@ -3,9 +3,9 @@
     package="tools.mahmoudmabrok.tawasol">
 
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-feature android:name="CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
-
-    <uses-feature android:name="CAMERA"/>
 
     <application
         android:allowBackup="true"
@@ -31,9 +31,11 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".feature.splash.Splash">
+        <activity android:name=".feature.splash.Splash" />
 
-        </activity>
+        <activity
+            android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
+            android:theme="@style/Base.Theme.AppCompat" />
     </application>
 
 </manifest>
